@@ -10,7 +10,18 @@ title: Don't Starve Calculator
     }
   </script>
   <h2>Don't Starve Calendar</h2>
-  <form><label for="day">Please enter the current day:</label><input type="number" id="day" name="day"><br><br>
-  <input type="submit" value="Submit" onclick="calc()"></form>
+  <p id="note">Please note that some or all of what you see here may not be relevant if you have customised your game settings. <i>Especially if you have adjusted the season lengths.</i></p>
+  <form>
+    <label for="day">Please enter the current day:</label>
+    <input type="number" id="day" name="day"><br><br>
+    <label for="dlc">Please choose the version of Don't Starve:</label>
+    <select id="dlc" name="dlc">
+      <option value="base">Don't Starve(base game)</option>
+      <option value="base">Reign of Giants</option>
+      <option value="base">Shipwrecked</option>
+      <option value="base">Hamlet</option>
+    </select>
+    <input type="submit" value="Submit" onclick="calc()">
+  </form>
   <p id="ans"></p>
 </body></html>
