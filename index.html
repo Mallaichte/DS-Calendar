@@ -6,12 +6,47 @@ title: Don't Starve Calculator
   <script>
     function calc() {
       //alert("The button, it does nothing! This page is still under construction.");
-      document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
+      var moonphase = ""; //current moon phase
+      var untilfullmoon = 0; //days until next full moon
+      var sincefullmoon = 0; //days since last full moon
+      var untilnewmoon = 0; //days until next new moon
+      var sincenewmoon = 0; //days since last new moon
+      var moontext = ""; //text summarising the above moon details
+      var season = ""; //current season
+      var nextseason = ""; //next season
+      var seasondays = 0; //days into the current season
+      var nextseasonin = 0; //days until next season
+      var seasontext = "";  //text sumarising the above season details
+      var seasonsummary = ""; //summary of general information about the current season
+      var nextseasonsummary = ""; //summary of general information about the upcomming season - this will be hidden by default, but can be optionally shown by the user
+      var currentday = 0; //integer value of the current day
+      currentday = document.forms["DSform"]["day"].value;
+      //Moon phase
+      if (currentday == 9 || currentday == 10 || (currentday - 9) % 16 == 0 || (currentday - 10) % 16 == 0) {
+        moonphase = "FULL MOON";
+      } else if (currentday == 3 || currentday == 4 || (currentday-3) % 16 == 0 || (currentday-4)%16 ==0){
+        moonphase = "WAXING CRESCENT";
+      } else if (currentday == 5 || currentday == 6 || (currentday-5)%16==0 || (currentday-6)%16==0){
+        moonphase = "Waxing Half Moon";
+      } else if (currentday == 7 || currentday == 8 || (currentday-7)%16==0 || (currentday-8)%16==0){
+        moonphase = "Waxing Gibbous Moon";
+      } else if (currentday == 11 || currentday == 12 || (currentday-11)%16==0 || (currentday-12)%16==0){
+        moonphase = "Waning Gibbous Moon";
+      } else if (currentday == 13 || currentday == 14 || (currentday-13)%16==0 || (currentday-14)%16==0){
+        moonphase = "Waning Half Moon";
+      } else if (currentday == 15 || currentday == 16 || (currentday-15)%16==0 || (currentday-16)%16==0){
+        moonphase = "Waning Crescent Moon";
+      } else {
+        moonphase = "No full moon";
+      }
+      
+      document.getElementById("ans").innerHTML="The current moon phase is <b>"+moonphase+"</b>.<br>Other features are still in progress.";
+      //document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
     }
   </script>
   <h2>Don't Starve Calendar</h2>
   <p id="note">Please note that some or all of what you see here may not be relevant if you have customised your game settings. <i>Especially if you have adjusted the season lengths.</i></p>
-  <form>
+  <form id="DSform">
     <label for="day">Please enter the current day:</label>
     <input type="number" id="day" name="day"><br>
     <label for="dlc">Please choose the version of Don't Starve:</label>
