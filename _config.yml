@@ -6,7 +6,7 @@ title: "Don't Starve Calendar"
 author: Jinx
 email: contact@mallaichte.live
 description: > # this means to ignore newlines until "baseurl:"
-  Ongoing and completed projects.
+  A calculator for the seasons and moon phases of Don't Starve.
 # social links
 twitter_username: ctfJinx # DO NOT include the @ character, or else the build will fail!
 github_username:  Mallaichte # DO NOT include the @ character, or else the build will fail!
