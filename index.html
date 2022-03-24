@@ -6,8 +6,8 @@ title: Don't Starve Calculator
   <p id="ans"> </p><br><br>
   <script>
     function calc() {
-      alert("The button, it does nothing! This page is still under construction.");
-      document.getElementById("ans").innerHTML="The button, it does nothing! This page is still under construction.";
+      //alert("The button, it does nothing! This page is still under construction.");
+      document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b> <br>This page is still under construction.";
     }
   </script>
   <h2>Don't Starve Calendar</h2>
@@ -22,7 +22,7 @@ title: Don't Starve Calculator
       <option value="ship">Shipwrecked</option>
       <option value="ham">Hamlet</option>
     </select>
-    <input type="submit" value="Submit" onclick="calc()">
+    <button id="submitbutton" type="button" onclick="calc()">Calculate</button>
   </form>
   <br>
 </body></html>
