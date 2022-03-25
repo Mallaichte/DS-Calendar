@@ -5,6 +5,7 @@ title: Don't Starve Calculator
 <html><head><title>Don't Starve Calendar Calculator</title></head><body>
   <script>
     function calc() {
+      document.getElementById("ans").innerHTML="<h2>PLEASE WAIT</h2>";
       //alert("The button, it does nothing! This page is still under construction.");
       var moonphase = ""; //current moon phase
       var untilfullmoon = 0; //days until next full moon
@@ -20,12 +21,16 @@ title: Don't Starve Calculator
       var seasonsummary = ""; //summary of general information about the current season
       var nextseasonsummary = ""; //summary of general information about the upcomming season - this will be hidden by default, but can be optionally shown by the user
       var currentday = 0; //integer value of the current day
+      var currentyear = 0; //integer value of the current year
+      var game = ""; //the game/dlc being checked
+      var fullgame = ""; //The full name of the game/dlc
       currentday = document.forms["DSform"]["day"].value;
+      game = document.forms["DSform"]["dlc"].value;
       //Moon phase
       if (currentday == 9 || currentday == 10 || (currentday - 9) % 16 == 0 || (currentday - 10) % 16 == 0) {
-        moonphase = "FULL MOON";
+        moonphase = "Full Moon";
       } else if (currentday == 3 || currentday == 4 || (currentday-3) % 16 == 0 || (currentday-4)%16 ==0){
-        moonphase = "WAXING CRESCENT";
+        moonphase = "Waxing Crescent Moon";
       } else if (currentday == 5 || currentday == 6 || (currentday-5)%16==0 || (currentday-6)%16==0){
         moonphase = "Waxing Half Moon";
       } else if (currentday == 7 || currentday == 8 || (currentday-7)%16==0 || (currentday-8)%16==0){
@@ -39,13 +44,65 @@ title: Don't Starve Calculator
       } else {
         moonphase = "No full moon";
       }
+      // Next full moon
+      var daycountfull = currentday;
+      do {
+        daycountfull++;
+      } while (daycountfull != 9 && daycountfull != 10 && (daycountfull - 9) % 16 != 0 && (daycountfull -10) % 16 != 0);
+      untilfullmoon = daycountfull - currentday;
+      sincefullmoon = 16 - untilfullmoon;
+      // Next new moon
+      var daycountnew = currentday;
+      do {
+        daycountnew++;
+      } while (daycountnew != 1 && daycountnew != 2 && (daycountnew -1) % 16 != 0 && (daycountnew -2)%16 != 0);
+      untilnewmoon = daycountnew - currentday;
+      sincenewmoon = 16 - untilnewmoon;
       
-      document.getElementById("ans").innerHTML="The current moon phase is <b>"+moonphase+"</b>.<br>Other features are still in progress.";
+      moontext = "Current moon phase: <b>"+moonphase+"</b><br>Days until full moon: <b>"+untilfullmoon+"</b><br>Days since full moon: <b>"+sincefullmoon+"</b></br>Days until new moon: <b>"+untilnewmoon+"</b><br>Days since new moon: <b>"+sincenewmoon+"</b><br>";
+      //Season
+      //NOTE: When working out days left until next season: multiply the year(+1) by the year length, subtract from that the length of each season still to come in the year and subtract the current day. To get the length into the current season: take the length of the current season and subtract the days remaining in the current season.
+      if (game == "base"){
+        fullgame = "<h3>Don't Starve (base game)</h3>";
+        //year = 35, Summer = 20, winter = 15
+        //year
+        year = Math.floor((currentday-1)/35);
+        if (currentday <= 20+ (year*35)) {
+          season = "Summer";
+          seasonsummary = "During summer the days are longer and the temperature is comfortable for the player.<br>Food is easier to find and grow, but it spoils faster.<br>Red hounds may attack.";
+          nextseason = "Winter";
+          nextseasonin = ((year+1)*35) - currentday - 15;
+          seasondays = 20 - nextseasonin;
+        } else {
+          season = "Winter";
+          seasonsummary ="During winter the days are shorter and the temperature is colder making it difficult for the player to wander far for long without a source of heat.<br>Food is harder to find and crops do not grow.<br>Blue hounds may attack. MacTusk, WeeTusk and 2 blue hounds (a walrus hunting party) can be found in an igloo at a walrus camp.<br>The <b>Deerclops</b> may attack the player. It is a good idea to keep it away from your camp as it will destroy structures.<br>Pengulls may also appear.";
+          nextseason = "Summer";
+          nextseasonin = ((year+1)*35) - currentday;
+          seasondays = 15 - nextseasonin;
+        }
+      } else if (game == "rog"){
+        fullgame = "<h3>Don't Starve: Reign of Giants</h3>";
+        season = "RoG season placeholder";
+        seasonsummary = "RoG summary placeholder";
+      } else if (game == "ship"){
+        fullgame = "<h3>Don't Starve: Shipwrecked</h3>";
+        season = "SW season placeholder";
+        seasonsummary = "SW summary placeholder";
+      } else if (game == "ham"){
+        fullgame = "<h3>Don't Starve: Hamlet</h3>";
+        season = "Hamlet season placeholder";
+        seasonsummary = "Hamlet summary placeholder";
+      } else {
+        season = "<b>ERROR:</b> DLC not found.";
+        seasonsummary = "";
+      }
+      seasontext = "Years completed: <b>"+year+"</b><br>Current season: <b>"+season+"</b><br>It has been "+season+" for <b>"+seasondays+"</b> days and "+nextseason+" starts in <b>"+(nextseasonin+1)+"</b> days.<br>";
+      document.getElementById("ans").innerHTML=fullgame+moontext+seasontext+seasonsummary+"<br>Other features are still in progress.";
       //document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
     }
   </script>
   <h2>Don't Starve Calendar</h2>
-  <p id="note">Please note that some or all of what you see here may not be relevant if you have customised your game settings. <i>Especially if you have adjusted the season lengths.</i></p>
+  <p id="note">Please note that the values used to calculate seasons are based on the default game settings. However, these figures are not always reliable due to an occasional <a href="https://dontstarve.fandom.com/wiki/Seasons/World">rounding error with the Don't Starve game</a> itself sometimes adding 1-2 days per year. This means the longer your game save has been going, the more likely you are to see discrepancies between your game and this page.</p>
   <form id="DSform">
     <label for="day">Please enter the current day:</label>
     <input type="number" id="day" name="day"><br>
