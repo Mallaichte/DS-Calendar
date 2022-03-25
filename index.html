@@ -97,16 +97,16 @@ title: Don't Starve Calculator
         seasonsummary = "";
       }
       seasontext = "Years completed: <b>"+year+"</b><br>Current season: <b>"+season+"</b><br>It has been "+season+" for <b>"+seasondays+"</b> days and "+nextseason+" starts in <b>"+(nextseasonin+1)+"</b> days.<br>";
-      document.getElementById("ans").innerHTML=fullgame+moontext+seasontext+seasonsummary+"<br>Other features are still in progress.";
+      document.getElementById("ans").innerHTML=fullgame+moontext+seasontext+seasonsummary+"<br>";
       //document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
     }
   </script>
   <h2>Don't Starve Calendar</h2>
   <p id="note">Please note that the values used to calculate seasons are based on the default game settings. However, these figures are not always reliable due to an occasional <a href="https://dontstarve.fandom.com/wiki/Seasons/World">rounding error with the Don't Starve game</a> itself sometimes adding 1-2 days per year. This means the longer your game save has been going, the more likely you are to see discrepancies between your game and this page.</p>
   <form id="DSform">
-    <label for="day">Please enter the current day:</label>
+    <label for="day">Enter the current day:</label>
     <input type="number" id="day" name="day"><br>
-    <label for="dlc">Please choose the version of Don't Starve:</label>
+    <label for="dlc">Version of Don't Starve:</label>
     <select id="dlc" name="dlc">
       <option value="base">Don't Starve(base game)</option>
       <option value="rog">Reign of Giants</option>
