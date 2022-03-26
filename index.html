@@ -249,7 +249,7 @@ title: Don't Starve Calculator
   <p id="note">Please note that the values used to calculate seasons are based on the default game settings. However, these figures are not always reliable due to an occasional <a href="https://dontstarve.fandom.com/wiki/Seasons/World">rounding error with the Don't Starve game</a> itself sometimes adding 1-2 days per year. This means the longer your game save has been going, the more likely you are to see discrepancies between your game and this page.<br>Information on the seasons was sourced from the <a href="https://dontstarve.fandom.com/wiki/">Don't Starve Wiki</a>.</p>
   <form id="DSform">
     <label for="day">Enter the current day:</label>
-    <input type="number" id="day" name="day"><br>
+    <input type="number" id="day" name="day" onchange="calc()"><br>
     <label for="dlc">Version of Don't Starve:</label>
     <select id="dlc" name="dlc" onchange="rogcheck()">
       <option value="base">Don't Starve(base game)</option>
