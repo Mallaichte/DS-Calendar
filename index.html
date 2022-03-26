@@ -12,6 +12,7 @@ title: Don't Starve Calculator
        document.getElementById("startseason").style.display = "none";
        document.getElementById("ss").style.display = "none";
      }
+      calc()
     }
     function calc() {
       document.getElementById("ans").innerHTML="<h2>PLEASE WAIT</h2>";
@@ -258,7 +259,7 @@ title: Don't Starve Calculator
     </select>  
     <button id="submitbutton" type="button" onclick="calc()">Calculate</button>
     <label id="ss" style="display:none;" for="startseason">[Reign of Giants only] starting season:</label>
-    <select style="display:none;" id="startseason" name="startseason">
+    <select style="display:none;" id="startseason" name="startseason" onchange="calc()">
       <option value="spring">Spring</option>
       <option calue="autumn">Autumn</option>
     </select>
