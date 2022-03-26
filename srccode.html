@@ -1,0 +1,235 @@
+<html><head><title>Don't Starve Calendar Calculator</title></head><body>
+  <script>
+    function rogcheck() {
+     if (document.forms["DSform"]["dlc"].value == "rog"){
+       document.getElementById("startseason").style.display = "block";
+       document.getElementById("ss").style.display = "block";
+     } else {
+       document.getElementById("startseason").style.display = "none";
+       document.getElementById("ss").style.display = "none";
+     }
+    }
+    function calc() {
+      document.getElementById("ans").innerHTML="<h2>PLEASE WAIT</h2>";
+      var moonphase = ""; //current moon phase
+      var untilfullmoon = 0; //days until next full moon
+      var sincefullmoon = 0; //days since last full moon
+      var untilnewmoon = 0; //days until next new moon
+      var sincenewmoon = 0; //days since last new moon
+      var moontext = ""; //text summarising the above moon details
+      var season = ""; //current season
+      var nextseason = ""; //next season
+      var seasondays = 0; //days into the current season
+      var nextseasonin = 0; //days until next season
+      var seasontext = "";  //text sumarising the above season details
+      var seasonsummary = ""; //summary of general information about the current season
+      var nextseasonsummary = ""; //summary of general information about the upcomming season - this will be hidden by default, but can be optionally shown by the user
+      var currentday = 0; //integer value of the current day
+      var currentyear = 0; //integer value of the current year
+      var game = ""; //the game/dlc being checked
+      var fullgame = ""; //The full name of the game/dlc
+      var startingseason = ""; //Starting season for Reign of Giants
+      var offset = 0; //offset the calendar day by this amount in Reign of Giants. If starting season is Autum then offset by 45.
+      currentday = document.forms["DSform"]["day"].value;
+      game = document.forms["DSform"]["dlc"].value;
+      startingseason = document.forms["DSform"]["startseason"].value;
+      //Moon phase
+      if (currentday == 9 || currentday == 10 || (currentday - 9) % 16 == 0 || (currentday - 10) % 16 == 0) {
+        moonphase = "Full Moon";
+      } else if (currentday == 3 || currentday == 4 || (currentday-3) % 16 == 0 || (currentday-4)%16 ==0){
+        moonphase = "Waxing Crescent Moon";
+      } else if (currentday == 5 || currentday == 6 || (currentday-5)%16==0 || (currentday-6)%16==0){
+        moonphase = "Waxing Half Moon";
+      } else if (currentday == 7 || currentday == 8 || (currentday-7)%16==0 || (currentday-8)%16==0){
+        moonphase = "Waxing Gibbous Moon";
+      } else if (currentday == 11 || currentday == 12 || (currentday-11)%16==0 || (currentday-12)%16==0){
+        moonphase = "Waning Gibbous Moon";
+      } else if (currentday == 13 || currentday == 14 || (currentday-13)%16==0 || (currentday-14)%16==0){
+        moonphase = "Waning Half Moon";
+      } else if (currentday == 15 || currentday == 16 || (currentday-15)%16==0 || (currentday-16)%16==0){
+        moonphase = "Waning Crescent Moon";
+      } else {
+        moonphase = "No full moon";
+      }
+      // Next full moon
+      var daycountfull = currentday;
+      do {
+        daycountfull++;
+      } while (daycountfull != 9 && daycountfull != 10 && (daycountfull - 9) % 16 != 0 && (daycountfull -10) % 16 != 0);
+      untilfullmoon = daycountfull - currentday;
+      sincefullmoon = 16 - untilfullmoon;
+      // Next new moon
+      var daycountnew = currentday;
+      do {
+        daycountnew++;
+      } while (daycountnew != 1 && daycountnew != 2 && (daycountnew -1) % 16 != 0 && (daycountnew -2)%16 != 0);
+      untilnewmoon = daycountnew - currentday;
+      sincenewmoon = 16 - untilnewmoon;
+      
+      moontext = "Current moon phase: <b>"+moonphase+"</b><br>Days until full moon: <b>"+untilfullmoon+"</b><br>Days since full moon: <b>"+sincefullmoon+"</b></br>Days until new moon: <b>"+untilnewmoon+"</b><br>Days since new moon: <b>"+sincenewmoon+"</b><br>";
+      //Season
+      if (game == "base"){
+        fullgame = "<h3>Don't Starve (base game)</h3>";
+        //year = 35, Summer = 20, winter = 15
+        //year
+        year = Math.floor((currentday-1)/35);
+        if (currentday <= 20+ (year*35)) {
+          season = "Summer";
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Summer\">summer</a> the days are longer and the temperature is comfortable for the player.<br>Food is easier to find and grow, but it spoils faster.<br>Red hounds may attack.";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Seasons/Winter\">Winter</a>";
+          nextseasonin = ((year+1)*35) - currentday - 15;
+          seasondays = 20 - nextseasonin;
+        } else {
+          season = "Winter";
+          seasonsummary ="During <a href=\"https://dontstarve.fandom.com/wiki/Seasons/Winter\">winter</a> the days are shorter and the temperature is low. The player is at risk of freezing.<br>Food is harder to find and crops do not grow.<br>Blue hounds may attack. MacTusk, WeeTusk and 2 blue hounds (a walrus hunting party) can be found in an igloo at a walrus camp.<br>The <a href=\"https://dontstarve.fandom.com/wiki/Deerclops\"><b>Deerclops</b></a> may attack the player. It is a good idea to keep it away from your camp as it will destroy structures.<br>Pengulls may also appear.";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Summer\">Summer</a>";
+          nextseasonin = ((year+1)*35) - currentday;
+          seasondays = 15 - nextseasonin;
+        }
+      } else if (game == "rog"){
+        fullgame = "<h3>Don't Starve: Reign of Giants</h3>";
+        season = "RoG season placeholder";
+        seasonsummary = "RoG summary placeholder";
+        //year = 70, spring = 20, summer = 15, autumn = 20, winter = 15
+        //Year
+        year =  Math.floor((currentday-1)/70);
+        if (startingseason == "Autumn"){
+          if (currentday <= 20+(year*70)){
+            season = "Autumn";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Seasons/Winter\">Winter</a>";
+            nextseasonin = ((year+1)*70) - currentday - 50;
+            seasondays = 20 - nextseasonin;
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Autumn\">autumn</a> the temperature is comfortable for the player.<br>The <a href=\"https://dontstarve.fandom.com/wiki/Bearger\"><b>Bearger</b></a> may be encountered.<br> Mini glaciers may form.";
+          } else if (currentday<=35+(year*70) && currentday>=21+(year*70)){
+            season = "Winter";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Spring\">Spring</a>";
+            nextseasonin = ((year+1)*70) - currentday - 35;
+            seasondays = 15 - nextseasonin; 
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Seasons/Winter\">winter</a> the days are short and temperature is low. The player is at risk of freezing.<br>The <a href=\"https://dontstarve.fandom.com/wiki/Deerclops\"><b>Deerclops</b></a> may be encountered.<br> Killer bees and homeless bees may be found. Butterflies, mosquitoes and frogs do not spawn.";
+          } else if (currentday<=55+(year*70) && currentday>=36+(year*70)){
+            season = "Spring";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Summer\">Summer</a>";
+            nextseasonin = ((year+1)*70) - currentday - 15;
+            seasondays = 20 - nextseasonin;
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Spring\">spring</a> bees become more hostile, more flowers will spawn and rabbit holes will close. <br> The <a href=\"https://dontstarve.fandom.com/wiki/Moose/Goose\"><b>Moose/Goose</b></a> may be encountered.<br>The temperature will be comfortable for players, but there will be frequent rain with puddles forming."; 
+          } else {
+            season = "Summer";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Autumn\">Autumn</a>";
+            nextseasonin = ((year+1)*70) - currentday;
+            seasondays = 15 - nextseasonin;
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Summer\">summer</a> days are longer and the temperature is high. The player is at risk of overheating.<br>The <a href=\"https://dontstarve.fandom.com/wiki/Dragonfly\"><b>Dragonfly</b></a> may be encountered.<br>Drought brings the risk of wildfires.";
+          }
+        } else {
+          if (currentday <= 20+(year*70)){
+            season = "Spring";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Summer\">Summer</a>";
+            nextseasonin = ((year+1)*70) - currentday - 50;
+            seasondays = 20 - nextseasonin;
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Spring\">spring</a> bees become more hostile, more flowers will spawn and rabbit holes will close. <br> The <a href=\"https://dontstarve.fandom.com/wiki/Moose/Goose\"><b>Moose/Goose</b></a> may be encountered.<br>The temperature will be comfortable for players, but there will be frequent rain with puddles forming.";
+          } else if (currentday<=35+(year*70) && currentday>=21+(year*70)){
+            season = "Summer";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Autumn\">Autumn</a>";
+            nextseasonin = ((year+1)*70) - currentday - 35;
+            seasondays = 15 - nextseasonin; 
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Summer\">summer</a> days are longer and the temperature is high. The player is at risk of overheating.<br>The <a href=\"https://dontstarve.fandom.com/wiki/Dragonfly\"><b>Dragonfly</b></a> may be encountered.<br>Drought brings the risk of wildfires.";
+          } else if (currentday<=55+(year*70) && currentday>=36+(year*70)){
+            season = "Autumn";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Seasons/Winter\">Winter</a>";
+            nextseasonin = ((year+1)*70) - currentday - 15;
+            seasondays = 20 - nextseasonin;  
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Autumn\">autumn</a> the temperature is comfortable for the player.<br>The <a href=\"https://dontstarve.fandom.com/wiki/Bearger\"><b>Bearger</b></a> may be encountered.<br> Mini glaciers may form.";   
+          } else {
+            season = "Winter";
+            nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Spring\">Spring</a>";
+            nextseasonin = ((year+1)*70) - currentday;
+            seasondays = 15 - nextseasonin;
+            seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Seasons/Winter\">winter</a> the days are short and temperature is low. The player is at risk of freezing.<br>The <a href=\"https://dontstarve.fandom.com/wiki/Deerclops\"><b>Deerclops</b></a> may be encountered.<br> Killer bees and homeless bees may be found. Butterflies, mosquitoes and frogs do not spawn.";
+          }
+        }
+      } else if (game == "ship"){
+        fullgame = "<h3>Don't Starve: Shipwrecked</h3>";
+        season = "SW season placeholder";
+        seasonsummary = "SW summary placeholder";
+        // Year = 73, Mild = 20, Hurricane = 16, Monsoon = 21, Dry = 16
+        //year
+        year = Math.floor((currentday-1)/73);
+        if (currentday <= 20+(year*73)){
+          season = "Mild";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Hurricane_Season\">Hurricane season</a>";
+          nextseasonin = ((year+1)*73) - currentday - 53;
+          seasondays = 20 - nextseasonin;
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Mild_Season\">mild season</a> seas are calm and the temperature is comfortable. Days are long and there is little rain fall.<br>There is very little to be wary of during mild season and is best used for exploration and resource gathering.";
+        } else if (currentday<=36+(year*73) && currentday>=21+(year*73)){
+          season = "Hurricane";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Monsoon_Season\">Monsoon season</a>";
+          nextseasonin = ((year+1)*73) - currentday - 37;
+          seasondays = 16 - nextseasonin; 
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Hurricane_Season\">hurricane season</a> there are strong winds, heavy rain, hail and severe lightning. There will be larger waves in the sea.<br>Parrots, fireflies and butterflies will not spawn. Seagulls can be found on land.";
+        } else if (currentday<=58+(year*73) && currentday>=37+(year*73)){
+          season = "Monsoon";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Dry_Season\">Dry season</a>";
+          nextseasonin = ((year+1)*73) - currentday - 16;
+          seasondays = 21 - nextseasonin;  
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Monsoon_Season\">monsoon season</a> days are shorter and heavy rainfall brings flooding. <br>Poison mosquitoes will appear in flooded areas, bees become more aggressive and <a href=\"https://dontstarve.fandom.com/wiki/Sharkitten_Den\">sharkitten dens</a> open with a greater chance of <a href=\"https://dontstarve.fandom.com/wiki/Tiger_Shark\">tiger shark</a> spawning.";   
+        } else {
+          season = "Dry";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Mild_Season\">Mild season</a>";
+          nextseasonin = ((year+1)*73) - currentday;
+          seasondays = 16 - nextseasonin;
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Dry_Season\">dry season</a> the volcano becomes active, days are long and the temperature becomes hot. The player is at risk of overheating.<br>The biggest threat during dry season is from <a href=\"https://dontstarve.fandom.com/wiki/Volcano_(object)#Eruptions\">volcanic erruptions</a> with <a href=\"https://dontstarve.fandom.com/wiki/Dragoon_Egg\">dragoon eggs</a> raining down near the player.";
+        }
+      } else if (game == "ham"){
+        fullgame = "<h3>Don't Starve: Hamlet</h3>";
+        season = "Hamlet season placeholder";
+        seasonsummary = "Hamlet summary placeholder";
+        //year = 33, temperate = 11, humid = 11, lush = 11
+        //year
+        year = Math.floor((currentday-1)/33);
+        if (currentday <= 11+(year*33)){
+          season = "Temperate";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Humid_Season\">Humid season</a>";
+          nextseasonin = ((year+1)*33) - currentday - 22;
+          seasondays = 11 - nextseasonin;
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Temperate_Season\">temperate season</a> rain and thunderstorms will occur.<br>Glowflies will spawn and form cocoons. This will result in rabid beetles at the end of the season.";
+        } else if (currentday<=22+(year*33) && currentday>=12+(year*33)){
+          season = "Humid";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Lush_Season\">Lush season</a>";
+          nextseasonin = ((year+1)*33) - currentday - 11;
+          seasondays = 11 - nextseasonin; 
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Humid_Season\">humid season</a> heavy fog will appear which can slow the player down if wearing extra clothing and will gradually increase wetness. Rain and lightning is more common. <br>Butterflies and glowflies no longer spawn.";
+        } else {
+          season = "Lush";
+          nextseason = "<a href=\"https://dontstarve.fandom.com/wiki/Temperate_Season\">Temperate season</a>";
+          nextseasonin = ((year+1)*33) - currentday;
+          seasondays = 11 - nextseasonin;
+          seasonsummary = "During <a href=\"https://dontstarve.fandom.com/wiki/Lush_Season\">lush season</a> there are strong winds and hay fever can be a problem for the player. <br>Brambles and bramble blooms appear. Tuber and rainforrest trees will bloom.";
+        }
+      } else {
+        season = "<b>ERROR:</b> DLC not found.";
+        seasonsummary = "";
+      }
+      seasontext = "Years completed: <b>"+year+"</b><br>Current season: <b>"+season+"</b><br>It has been "+season+" for <b>"+seasondays+"</b> days and "+nextseason+" starts in <b>"+(nextseasonin+1)+"</b> days.<br>";
+      document.getElementById("ans").innerHTML=fullgame+moontext+seasontext+seasonsummary+"<br>";
+    }
+  </script>
+  <h2>Don't Starve Calendar</h2>
+  <p id="note">Please note that the values used to calculate seasons are based on the default game settings. However, these figures are not always reliable due to an occasional <a href="https://dontstarve.fandom.com/wiki/Seasons/World">rounding error with the Don't Starve game</a> itself sometimes adding 1-2 days per year. This means the longer your game save has been going, the more likely you are to see discrepancies between your game and this page.<br>Information on the seasons was sourced from the <a href="https://dontstarve.fandom.com/wiki/">Don't Starve Wiki</a>.</p>
+  <form id="DSform">
+    <label for="day">Enter the current day:</label>
+    <input type="number" id="day" name="day"><br>
+    <label for="dlc">Version of Don't Starve:</label>
+    <select id="dlc" name="dlc" onchange="rogcheck()">
+      <option value="base">Don't Starve(base game)</option>
+      <option value="rog">Reign of Giants</option>
+      <option value="ship">Shipwrecked</option>
+      <option value="ham">Hamlet</option>
+    </select>  
+    <button id="submitbutton" type="button" onclick="calc()">Calculate</button>
+    <label id="ss" style="display:none;" for="startseason">[Reign of Giants only] starting season:</label>
+    <select style="display:none;" id="startseason" name="startseason">
+      <option value="spring">Spring</option>
+      <option calue="autumn">Autumn</option>
+    </select>
+  </form>
+  <p id="ans"> </p><br><br><br>
+</body></html>
