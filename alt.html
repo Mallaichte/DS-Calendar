@@ -46,21 +46,21 @@ title: Don't Starve Calculator
       startingseason = document.forms["DSform"]["startseason"].value;
       //Moon phase
       if (currentday == 9 || currentday == 10 || (currentday - 9) % 16 == 0 || (currentday - 10) % 16 == 0) {
-        moonphase = "Full Moon<img src=\"img/full.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "Full Moon <img src=\"img/full.png\" style=\"width:10px;height:10px;\">";
       } else if (currentday == 3 || currentday == 4 || (currentday-3) % 16 == 0 || (currentday-4)%16 ==0){
-        moonphase = "Waxing Crescent Moon<img src=\"img/waxc.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "Waxing Crescent Moon <img src=\"img/waxc.png\" style=\"width:10px;height:10px;\">";
       } else if (currentday == 5 || currentday == 6 || (currentday-5)%16==0 || (currentday-6)%16==0){
-        moonphase = "Waxing Half Moon<img src=\"img/waxh.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "Waxing Half Moon <img src=\"img/waxh.png\" style=\"width:10px;height:10px;\">";
       } else if (currentday == 7 || currentday == 8 || (currentday-7)%16==0 || (currentday-8)%16==0){
-        moonphase = "Waxing Gibbous Moon<img src=\"img/waxg.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "Waxing Gibbous Moon <img src=\"img/waxg.png\" style=\"width:10px;height:10px;\">";
       } else if (currentday == 11 || currentday == 12 || (currentday-11)%16==0 || (currentday-12)%16==0){
-        moonphase = "Waning Gibbous Moon<img src=\"img/wang.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "Waning Gibbous Moon <img src=\"img/wang.png\" style=\"width:10px;height:10px;\">";
       } else if (currentday == 13 || currentday == 14 || (currentday-13)%16==0 || (currentday-14)%16==0){
-        moonphase = "Waning Half Moon<img src=\"img/wanh.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "Waning Half Moon <img src=\"img/wanh.png\" style=\"width:10px;height:10px;\">";
       } else if (currentday == 15 || currentday == 16 || (currentday-15)%16==0 || (currentday-16)%16==0){
-        moonphase = "Waning Crescent Moon<img src=\"img/wanc.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "Waning Crescent Moon <img src=\"img/wanc.png\" style=\"width:10px;height:10px;\">";
       } else {
-        moonphase = "Newmoon<img src=\"img/new.png\" style=\"width:15px;height:15px;\">";
+        moonphase = "New Moon <img src=\"img/new.png\" style=\"width:10px;height:10px;\">";
       }
       // Next full moon
       var daycountfull = currentday;
