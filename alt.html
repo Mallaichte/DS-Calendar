@@ -4,6 +4,7 @@ title: Don't Starve Calculator
 ---
 <html><head><title>Don't Starve Calendar Calculator</title></head><body>
   <script>
+    document.getElementById("DSform").scrollIntoView({behavior: 'smooth'});
     function rogcheck() {
      if (document.forms["DSform"]["dlc"].value == "rog"){
        document.getElementById("startseason").style.display = "block";
@@ -45,19 +46,19 @@ title: Don't Starve Calculator
       startingseason = document.forms["DSform"]["startseason"].value;
       //Moon phase
       if (currentday == 9 || currentday == 10 || (currentday - 9) % 16 == 0 || (currentday - 10) % 16 == 0) {
-        moonphase = "Full Moon";
+        moonphase = "Full Moon<img src=\"/img/full.png\">";
       } else if (currentday == 3 || currentday == 4 || (currentday-3) % 16 == 0 || (currentday-4)%16 ==0){
-        moonphase = "Waxing Crescent Moon";
+        moonphase = "Waxing Crescent Moon<img src=\"/img/waxc.png\">";
       } else if (currentday == 5 || currentday == 6 || (currentday-5)%16==0 || (currentday-6)%16==0){
-        moonphase = "Waxing Half Moon";
+        moonphase = "Waxing Half Moon<img src=\"/img/waxh.png\">";
       } else if (currentday == 7 || currentday == 8 || (currentday-7)%16==0 || (currentday-8)%16==0){
-        moonphase = "Waxing Gibbous Moon";
+        moonphase = "Waxing Gibbous Moon<img src=\"/img/waxg.png\">";
       } else if (currentday == 11 || currentday == 12 || (currentday-11)%16==0 || (currentday-12)%16==0){
-        moonphase = "Waning Gibbous Moon";
+        moonphase = "Waning Gibbous Moon<img src=\"/img/wang.png\">";
       } else if (currentday == 13 || currentday == 14 || (currentday-13)%16==0 || (currentday-14)%16==0){
-        moonphase = "Waning Half Moon";
+        moonphase = "Waning Half Moon<img src=\"/img/wanh.png\">";
       } else if (currentday == 15 || currentday == 16 || (currentday-15)%16==0 || (currentday-16)%16==0){
-        moonphase = "Waning Crescent Moon";
+        moonphase = "Waning Crescent Moon<img src=\"/img/wanc.png\">";
       } else {
         moonphase = "No full moon";
       }
@@ -249,7 +250,7 @@ title: Don't Starve Calculator
       //document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
     }
   </script>
-  <h2>Don't Starve Calendar</h2>
+  <h2 id="head">Don't Starve Calendar</h2>
   <p id="note">Please note that the values used to calculate seasons are based on the default game settings. However, these figures are not always reliable due to an occasional <a href="https://dontstarve.fandom.com/wiki/Seasons/World">rounding error with the Don't Starve game</a> itself sometimes adding 1-2 days per year. This means the longer your game save has been going, the more likely you are to see discrepancies between your game and this page.<br>Information on the seasons was sourced from the <a href="https://dontstarve.fandom.com/wiki/">Don't Starve Wiki</a>.</p>
   <form id="DSform" onsubmit="scrolld();return false">
     <label for="day">Enter the current day:</label>
@@ -268,5 +269,6 @@ title: Don't Starve Calculator
       <option calue="autumn">Autumn</option>
     </select>
   </form>
-  <p id="ans"> </p><br><br><br>
+  <p id="ans"> </p>
+  <br><br><br>
 </body></html>
