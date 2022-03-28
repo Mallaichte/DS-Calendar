@@ -4,6 +4,7 @@ title: Don't Starve Calculator
 ---
 <html><head><title>Don't Starve Calendar Calculator</title></head><body>
   <script>
+    document.getElementById("head").scrollIntoView({behavior
     function rogcheck() {
      if (document.forms["DSform"]["dlc"].value == "rog"){
        document.getElementById("startseason").style.display = "block";
@@ -249,7 +250,7 @@ title: Don't Starve Calculator
       //document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
     }
   </script>
-  <h2>Don't Starve Calendar</h2>
+  <h2 id="head">Don't Starve Calendar</h2>
   <p id="note">Please note that the values used to calculate seasons are based on the default game settings. However, these figures are not always reliable due to an occasional <a href="https://dontstarve.fandom.com/wiki/Seasons/World">rounding error with the Don't Starve game</a> itself sometimes adding 1-2 days per year. This means the longer your game save has been going, the more likely you are to see discrepancies between your game and this page.<br>Information on the seasons was sourced from the <a href="https://dontstarve.fandom.com/wiki/">Don't Starve Wiki</a>.</p>
   <form id="DSform" onsubmit="scrolld();return false">
     <label for="day">Enter the current day:</label>
