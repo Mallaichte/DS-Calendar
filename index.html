@@ -14,6 +14,10 @@ title: Don't Starve Calculator
      }
       calc()
     }
+    function scrolld() {
+      calc()
+      document.getElementById("ans").scrollIntoView({behavior: 'smooth'})
+    }
     function calc() {
       document.getElementById("ans").innerHTML="<h2>PLEASE WAIT</h2>";
       //alert("The button, it does nothing! This page is still under construction.");
@@ -243,12 +247,11 @@ title: Don't Starve Calculator
       seasontext = "Years completed: <b>"+year+"</b><br>Current season: <b>"+season+"</b><br>It has been "+season+" for <b>"+seasondays+"</b> days and "+nextseason+" starts in <b>"+(nextseasonin+1)+"</b> days.<br>";
       document.getElementById("ans").innerHTML=fullgame+moontext+seasontext+seasonsummary+"<br>";
       //document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
-      document.getElementById("ans").scrollIntoView({behavior: 'smooth'});
     }
   </script>
   <h2>Don't Starve Calendar</h2>
   <p id="note">Please note that the values used to calculate seasons are based on the default game settings. However, these figures are not always reliable due to an occasional <a href="https://dontstarve.fandom.com/wiki/Seasons/World">rounding error with the Don't Starve game</a> itself sometimes adding 1-2 days per year. This means the longer your game save has been going, the more likely you are to see discrepancies between your game and this page.<br>Information on the seasons was sourced from the <a href="https://dontstarve.fandom.com/wiki/">Don't Starve Wiki</a>.</p>
-  <form id="DSform" onsubmit="calc();return false">
+  <form id="DSform" onsubmit="scrolld();return false">
     <label for="day">Enter the current day:</label>
     <input type="number" id="day" name="day" onchange="calc()"><br>
     <label for="dlc">Version of Don't Starve:</label>
@@ -258,7 +261,7 @@ title: Don't Starve Calculator
       <option value="ship">Shipwrecked</option>
       <option value="ham">Hamlet</option>
     </select>  
-    <button id="submitbutton" type="submit" onclick="calc()">Calculate</button>
+    <button id="submitbutton" type="submit" onclick="scrolld();return false">Go</button>
     <label id="ss" style="display:none;" for="startseason">[Reign of Giants only] starting season:</label>
     <select style="display:none;" id="startseason" name="startseason" onchange="calc()">
       <option value="spring">Spring</option>
