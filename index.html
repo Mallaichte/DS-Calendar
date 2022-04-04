@@ -205,7 +205,7 @@ title: Don't Starve Calculator
       }
       seasonsummary = seasonsummarylist[game][season];
       seasontext = "Years completed: <b>"+year+"</b><br>Current season: <b>"+season+"</b><br>It has been <a href=\""+seasonlinks[season]+"\">"+season+"</a> for <b>"+seasondays+"</b> days and <a href=\""+seasonlinks[nextseason]+"\">"+nextseason+"</a> starts in <b>"+(nextseasonin+1)+"</b> days.<br>";
-      document.getElementById("ans").innerHTML=fullgame+moontext+seasontext+"<h4>Current season: "+season+"</h4>"+seasonsummary+"<h4>Next season: "+nextseason+"</h4>"+seasonsummarylist[game][nextseason];
+      document.getElementById("ans").innerHTML=fullgame+moontext+seasontext+"<br><h3>Current season: "+season+"</h3>"+seasonsummary+"<br><h3>Next season: "+nextseason+"</h3>"+seasonsummarylist[game][nextseason];
       //document.getElementById("ans").innerHTML="The button, it does <b>nothing!</b><br><img src='https://mallaichte.live/DS-Calendar/goggles.gif'><br>This page is still under construction.";
     }
   </script>
