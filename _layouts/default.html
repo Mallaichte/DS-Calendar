@@ -10,28 +10,70 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.topnav {
+.navbar {
   overflow: hidden;
   background-color: #333;
 }
 
-.topnav a {
+/* Navigation links */
+.navbar a {
   float: left;
-  color: #ff1515;
+  font-size: 16px;
+  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
 }
 
-.topnav a:hover {
-  background-color: #ddd;
+/* The subnavigation menu */
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+/* Subnav button */
+.subnav .subnavbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+/* Add a red background color to navigation links on hover */
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: #ff1515;
+}
+
+/* Style the subnav content - positioned absolute */
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: red;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Style the subnav links */
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+/* Add a grey background color on hover */
+.subnav-content a:hover {
+  background-color: #eee;
   color: black;
 }
 
-.topnav a.active {
-  background-color: #ff1515;
-  color: white;
+/* When you move the mouse over the subnav container, open the subnav content */
+.subnav:hover .subnav-content {
+  display: block;
 }
 </style>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
@@ -41,10 +83,17 @@ body {
   </head>
 
   <body>
-<div class="topnav">
+<div class="navbar">
   <a href="https://mallaichte.live/">Home</a>
   <a href="https://blog.mallaichte.live/">Blog</a>
-  <a class="active" href="https://mallaichte.live/projects">Projects</a>
+  <div class="subnav">
+    <button class="subnavbtn"><a href="https://mallaichte.live/projects">Projects</a> <i class="fa fa-caret-down"></i></button>
+    <div class="subnav-content">
+      <a href="https://mallaichte.live/DS-Calendar/">Don't Starve Calendar Calculator</a>
+      <a href="https://mallaichte.live/eProWrestling/">ePro Wrestling</a>
+      <a href="https://mallaichte.live/projects">All other projects</a>
+    </div>
+  </div>
   <a href="https://mallaichte.live/news">News</a>
   <a href="https://mallaichte.live/contact.html">Contact</a>
 </div>
